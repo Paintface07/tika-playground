@@ -13,7 +13,13 @@ public class Main {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             while (true) {
-                System.out.println("Please enter the number of the file to parse (or q to exit): ");
+                System.out.println("Please enter the number of the file to parse: ");
+                System.out.println(" Options are ---------------------");
+                System.out.println(" * json - a json file");
+                System.out.println(" * ods  - an ODF spreadsheet file");
+                System.out.println(" * txt  - a plain text file");
+                System.out.println(" * xml  - a simple XML file");
+                System.out.println(" * q    - exit");
                 String input = reader.readLine();
 
                 if("q".equalsIgnoreCase(input)) {
