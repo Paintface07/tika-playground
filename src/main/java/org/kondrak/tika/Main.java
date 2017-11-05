@@ -1,50 +1,65 @@
 package org.kondrak.tika;
 
-import org.apache.tika.Tika;
-import org.apache.tika.metadata.Metadata;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import org.kondrak.tika.context.ApplicationContext;
+import org.kondrak.tika.events.LoadFileEventHandler;
 
-import java.io.*;
+public class Main extends Application {
 
-public class Main {
-
-//    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
+//    private Desktop desktop = Desktop.getDesktop();
+    private ApplicationContext context;
 
     public static void main(String[] args) {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            while (true) {
-                System.out.println("Please enter the number of the file to parse: ");
-                System.out.println(" Options are ---------------------");
-                System.out.println(" * json - a json file");
-                System.out.println(" * ods  - an ODF spreadsheet file");
-                System.out.println(" * txt  - a plain text file");
-                System.out.println(" * xml  - a simple XML file");
-                System.out.println(" * q    - exit");
-                String input = reader.readLine();
+        launch(args);
+    }
 
-                if("q".equalsIgnoreCase(input)) {
-                    System.exit(0);
-                } else {
-                    System.out.println("In catch-all!");
-                    Tika tika = new Tika();
-                    try(InputStream stream = new FileInputStream(new File(Main.class.getClassLoader().getResource(input + "." + input).getFile()))) {
-                        Metadata metadata = new Metadata();
-//                        BufferedReader r = (BufferedReader) tika.parse(stream, metadata);
-//                        System.out.println(r.readLine());
-                        System.out.println(tika.parseToString(stream));
-                        System.out.println(tika.parse(stream, metadata));
-                        String[] metadataNames = metadata.names();
+    @Override
+    public void start(Stage stage) {
+        context = new ApplicationContext(stage);
+        stage.setTitle("Menu Sample");
+        Scene scene = new Scene(new VBox(), 1024, 768);
+        scene.setFill(Color.OLDLACE);
 
-                        for(String name : metadataNames) {
-                            System.out.println(name + " : " + metadata.get(name));
-                        }
-                    } catch(Exception ex) {
-                        System.out.println("Error: " + ex);
-                    }
-                }
-            }
-        } catch(Exception ex) {
-            System.out.println("Error: " + ex);
-        }
+        context.getContentArea().setPrefHeight(600);
+        ((VBox) scene.getRoot()).getChildren().addAll(buildMenu(context), new BorderPane(
+                context.getContentArea(),
+                new Button("Top"),
+                new Button("Right"),
+                new Button("Bottom"),
+                context.getMetadataArea()
+        ));
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private static MenuBar buildMenu(ApplicationContext context) {
+        MenuBar menuBar = new MenuBar();
+
+        Menu openItem = new Menu("Open...");
+        openItem.setOnAction(new LoadFileEventHandler(context));
+
+        // --- Menu File
+        Menu menuFile = new Menu("File");
+        menuFile.getItems().addAll(
+                openItem,
+                new Menu("Exit"));
+
+        // --- Menu Edit
+        Menu menuEdit = new Menu("Edit");
+
+        // --- Menu View
+        Menu menuView = new Menu("View");
+
+        menuBar.getMenus().addAll(menuFile, menuEdit, menuView);
+        return menuBar;
     }
 }
