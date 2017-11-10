@@ -2,7 +2,6 @@ package org.kondrak.tika;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
@@ -28,12 +27,12 @@ public class Main extends Application {
         Scene scene = new Scene(new VBox(), 1024, 768);
         scene.setFill(Color.OLDLACE);
 
-        context.getContentArea().setPrefHeight(600);
-        ((VBox) scene.getRoot()).getChildren().addAll(buildMenu(context), new BorderPane(
+        ((VBox) scene.getRoot()).getChildren().addAll(buildMenu(context), context.getOpenFileLabel(),
+                new BorderPane(
                 context.getContentArea(),
-                new Button("Top"),
-                new Button("Right"),
-                new Button("Bottom"),
+                /*new Button("Top")*/new VBox(),
+                /*new Button("Right")*/new VBox(),
+                /*new Button("Bottom")*/new VBox(),
                 context.getMetadataArea()
         ));
 

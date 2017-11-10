@@ -1,0 +1,92 @@
+ 
+
+Getting Started with Apache Tika
+
+This document describes how to build Apache Tika from sources and how to start using Tika in an application.
+
+Getting and building the sources
+To build Tika from sources you ﬁrst need to either download a source release or checkout the latest sources from version control.
+
+Once you have the sources, you can build them using the Maven 2 Lo build system. Executing the following command in the base directory
+W111 build the somces and install the resulting artifacts 1n your local Maven repository.
+
+mvn install
+
+See the Maven documentation {01 more information about the available build options.
+
+Note that you need Java 7 or higher to build Tika.
+
+Build artifacts
+
+The Tika build consists of a number of components and produces the following main binaries:
+
+ 
+
+tikaicol'e/target/ﬁkaiml .jal'
+
+Tika core library. Contains the core interfaces and classes of Tika, but none of the parser implementations. Depends only on Java 6.
+tika?pal'sel's/talget/tika?pal'sel'sﬁtjar
+
+Tika parsers. Collection of classes that implement the Tika Parser inteIface based on various external parser h'bIaJies.
+tika41mmm'gemikaiappi’“,jal~
+
+Tika application. Combines the above components and all the external parseI libraries into a single runnable jar with a GUI and a
+
+command line interface.
+
+NEApache
+
+Softwa re Foundation
+
+Apache 11k:
+Inlmduchm
+Dmmload
+Conmbule
+Maxlmg 1.1515
+T1ka “lb 10
+Issue Tracker @
+
+Documentation
+
+. Apache ma 1 15
+
+Geﬂmg Smell
+
+Supported Formats
+
+Parser API
+
+Parser 5mm chk Stan Gmde
+Coutenl and Language Detecuon
+Conﬁgunng T1ka
+
+Usage Exnmples
+
+API Documentauon
+
+REST AP] Documentzmou (1mm)
+Apache m: 1 13
+
+Apache ma 1 14
+
+Apache 1'sz 1 13
+
+Apache ma 1 12
+
+Apache mm 1 11
+
+Apache le2 1 10
+
+The Apache Software Foundation
+
+Am“ 19
+Lnense L0
+Secum} 19
+Sponsorshsp 19
+Thanks 10
+
+Search with Apache So"
+\hrovtder ,
+
+Books about nka
+
